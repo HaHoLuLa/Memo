@@ -1,0 +1,47 @@
+{
+  "name": "electron-vite",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "concurrently -k \"npm run dev\" \"cross-env NODE_ENV=development npm run electron\"",
+    "dev": "cd renderer && npm run dev",
+    "electron": "wait-on http://localhost:3000 && electron .",
+    "build": "npm run build:renderer && electron-builder",
+    "build:renderer": "cd renderer && npm run build",
+    "preview": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^34.0.1",
+    "electron-builder": "^25.1.8",
+    "wait-on": "^8.0.2"
+  },
+  "build": {
+    "appId": "com.example.electronapp",
+    "productName": "ElectronApp",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.js",
+      "dist/**/*",
+      "renderer/dist/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
