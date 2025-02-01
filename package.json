@@ -22,16 +22,19 @@
     "wait-on": "^8.0.2"
   },
   "build": {
-    "appId": "com.example.electronapp",
-    "productName": "ElectronApp",
+    "appId": "com.haholula.Memo",
+    "productName": "Memo",
     "directories": {
       "output": "dist",
       "buildResources": "assets"
     },
+    "asar": true,
+    "compression": "maximum",
     "files": [
       "main.js",
       "dist/**/*",
       "renderer/dist/**/*",
+      "preload.js",
       "package.json"
     ],
     "win": {
