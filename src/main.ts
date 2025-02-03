@@ -1,5 +1,5 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -17,7 +17,7 @@ function createWindow() {
     mainWindow.loadURL('http://localhost:3000');
   } else {
     console.log('배포');
-    mainWindow.loadFile(path.join(__dirname, './renderer/dist/index.html'));
+    mainWindow.loadFile(path.join(__dirname, '../renderer/dist/index.html'));
   }
 }
 

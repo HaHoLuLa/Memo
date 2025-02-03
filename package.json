@@ -1,9 +1,9 @@
 {
   "name": "electron-vite",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "concurrently -k \"npm run dev\" \"cross-env NODE_ENV=development npm run electron\"",
+    "start": "concurrently -k \"npm run dev\" \"tsc && cross-env NODE_ENV=development npm run electron\"",
     "dev": "cd renderer && npm run dev",
     "electron": "wait-on http://localhost:3000 && electron .",
     "build": "npm run build:renderer && electron-builder",
@@ -19,22 +19,21 @@
     "cross-env": "^7.0.3",
     "electron": "^34.0.1",
     "electron-builder": "^25.1.8",
+    "typescript": "^5.7.3",
     "wait-on": "^8.0.2"
   },
   "build": {
     "appId": "com.haholula.Memo",
     "productName": "Memo",
     "directories": {
-      "output": "dist",
+      "output": "build",
       "buildResources": "assets"
     },
     "asar": true,
     "compression": "maximum",
     "files": [
-      "main.js",
       "dist/**/*",
       "renderer/dist/**/*",
-      "preload.js",
       "package.json"
     ],
     "win": {
