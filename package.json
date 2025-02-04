@@ -34,10 +34,12 @@
     "files": [
       "dist/**/*",
       "renderer/dist/**/*",
-      "package.json"
+      "package.json",
+      "assets/**/*"
     ],
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "assets/icon-512.png"
     },
     "mac": {
       "target": "dmg"

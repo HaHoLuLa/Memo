@@ -1,0 +1,43 @@
+/* @font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: 'SUITE-Regular', sans-serif;
+  user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--color-background);
+}
+
+.close-button:hover {
+  background-color: red !important;
+}
+
+.title-bar {
+  -webkit-app-region: drag;
+}
+
+.title-bar-button {
+  -webkit-app-region: no-drag;
+  user-select: none;
+  height: 100%;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}

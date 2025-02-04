@@ -1,10 +1,17 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 
+let mainWindow: BrowserWindow | null = null;
+
 function createWindow() {
-  const mainWindow = new BrowserWindow({
-    width: 800,
+  mainWindow = new BrowserWindow({
+    width: 300,
     height: 600,
+    resizable: false,
+    frame: false,
+    titleBarStyle: 'hidden',
+    useContentSize: true,
+    icon: path.join(__dirname, '../assets/icon-512.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -33,4 +40,21 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+ipcMain.on('message', (event, message) => {
+  console.log('Received message from Renderer:', message);
+  event.reply('message', `Hello from Main Process! You sent: ${message}`);
+});
+
+ipcMain.on('close-window', () => {
+  console.log('Close window event received');
+  app.quit();
+});
+
+ipcMain.on('minimal-window', () => {
+  console.log('Minimal window event received');
+  // mainWindow.blur();
+  if (mainWindow)
+    mainWindow.minimize();
 });
