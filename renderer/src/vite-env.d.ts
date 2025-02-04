@@ -6,5 +6,6 @@ interface Window {
     closeWindow: () => void;
     minimalWindow: () => void;
     onMessage: (callback: (data: string) => void) => void;
+    maximialWindow: () => void;
   };
 }

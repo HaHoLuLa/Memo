@@ -5,17 +5,20 @@ let mainWindow: BrowserWindow | null = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 300,
+    width: 800,
     height: 600,
-    resizable: false,
+    // resizable: false,
     frame: false,
     titleBarStyle: 'hidden',
     useContentSize: true,
+    minWidth: 300,
+    minHeight: 200,
     icon: path.join(__dirname, '../assets/icon-512.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
+      devTools: true,
     },
   });
 
@@ -47,14 +50,23 @@ ipcMain.on('message', (event, message) => {
   event.reply('message', `Hello from Main Process! You sent: ${message}`);
 });
 
-ipcMain.on('close-window', () => {
-  console.log('Close window event received');
-  app.quit();
-});
-
 ipcMain.on('minimal-window', () => {
   console.log('Minimal window event received');
   // mainWindow.blur();
   if (mainWindow)
     mainWindow.minimize();
+});
+
+ipcMain.on('maximial-window', () => {
+  console.log('Maximial window event received');
+  if (mainWindow)
+    if (mainWindow.isMaximized())
+      mainWindow.unmaximize();
+    else
+      mainWindow.maximize();
+});
+
+ipcMain.on('close-window', () => {
+  console.log('Close window event received');
+  app.quit();
 });

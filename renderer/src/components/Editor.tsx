@@ -14,8 +14,6 @@ export default function Editor() {
   })
 
   return (
-    <EditorContent editor={editor} style={{
-      margin: "0.75rem",
-    }} />
+    <EditorContent editor={editor} />
   )
 }
