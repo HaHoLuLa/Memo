@@ -6,6 +6,10 @@ interface Window {
     closeWindow: () => void;
     minimalWindow: () => void;
     onMessage: (callback: (data: string) => void) => void;
-    maximialWindow: () => void;
+    maximalWindow: () => void;
+    changeTitle: (title: string) => void;
+    openDialog: () => void;
+    onFileOpened: (callback: (data: string) => void) => void;
+    saveDialog: (data: string) => void;
   };
 }

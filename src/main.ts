@@ -1,5 +1,6 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import path from 'path';
+import fs from 'fs';
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -57,8 +58,8 @@ ipcMain.on('minimal-window', () => {
     mainWindow.minimize();
 });
 
-ipcMain.on('maximial-window', () => {
-  console.log('Maximial window event received');
+ipcMain.on('maximal-window', () => {
+  console.log('Maximal window event received');
   if (mainWindow)
     if (mainWindow.isMaximized())
       mainWindow.unmaximize();
@@ -70,3 +71,54 @@ ipcMain.on('close-window', () => {
   console.log('Close window event received');
   app.quit();
 });
+
+ipcMain.on('change-title', (event, title) => {
+  console.log('Change title event received');
+  if (mainWindow)
+    mainWindow.setTitle(title);
+});
+
+ipcMain.on('open-dialog', (event) => {
+  console.log('Open dialog event received');
+  if (mainWindow)
+    dialog.showOpenDialog(mainWindow, {
+      title: '메모 열기',
+      filters: [{ name: 'Json', extensions: ['json'] }],
+      properties: ['openFile'],
+    }).then(({ filePaths }) => {
+      if (filePaths.length > 0) {
+        const filePath = filePaths[0];
+        console.log('File path:', filePath);
+        
+        fs.readFile(filePath, 'utf-8', (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log('File data:', data);
+          event.reply('file-opened', data);
+        });
+      }
+    })
+});
+
+ipcMain.on('save-dialog', (event, data) => {
+  console.log('Save dialog event received');
+  if (mainWindow)
+    dialog.showSaveDialog(mainWindow, {
+      title: '메모 저장',
+      defaultPath: 'memo.json',
+      filters: [{ name: 'Json', extensions: ['json'] }],
+    }).then(({ filePath }) => {
+      if (filePath) {
+        console.log('File path:', filePath);
+        fs.writeFile(filePath, data, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log('File saved');
+        });
+      }
+    }).catch((err) => console.error(err));
+})
