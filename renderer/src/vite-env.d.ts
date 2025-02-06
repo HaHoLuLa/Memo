@@ -10,6 +10,7 @@ interface Window {
     changeTitle: (title: string) => void;
     openDialog: () => void;
     onFileOpened: (callback: (data: string) => void) => void;
-    saveDialog: (data: string) => void;
+    saveDialog: (data: string, filePath?: string) => void;
+    getFilePath: (callback: (filePath: string) => void) => void;
   };
 }

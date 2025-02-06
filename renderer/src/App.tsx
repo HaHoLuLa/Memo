@@ -1,31 +1,9 @@
-import TitleBar from "./TitleBar";
-// import Editor from "./components/Editor";
-import { useEffect, useState } from "react";
-import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import TitleBar from "./components/TitleBar";
+import { EditorContent, EditorContext } from "@tiptap/react";
+import { useEditorSetup } from "./hooks/useEditorSetup";
 
 function App() {
-  const [title, setTitle] = useState("Memo");
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-    ],
-    content: `
-        <h2>
-          Hello World!
-        </h2>
-      `,
-    onUpdate({ editor }) {
-      window.electronAPI.changeTitle(editor.getText().split("\n")[0] || "Memo")
-      setTitle(editor.getText().split("\n")[0] || "Memo")
-      console.log(editor.getJSON())
-    }
-  })
-
-  useEffect(() => {
-    setTitle(editor?.getText().split("\n")[0] || "Memo")
-    window.electronAPI.changeTitle(editor?.getText().split("\n")[0] || "Memo")
-  }, [editor])
+  const { editor, title, setTitle } = useEditorSetup();
 
   return (
     <EditorContext.Provider value={{ editor }}>
@@ -39,7 +17,6 @@ function App() {
         }}
       >
         <main>
-          {/* <Editor setTitle={setTitle} /> */}
           <EditorContent editor={editor} />
         </main>
       </div>
