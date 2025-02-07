@@ -1,15 +1,14 @@
 import { Editor, useCurrentEditor } from "@tiptap/react";
-import { useState } from "react";
 import { electronAPI } from "../utils/electronAPI";
+import { useTitleStore, usePathStore } from "../utils/stores";
 
-export function useTitleBar(setTitle: (title: string) => void) {
+export function useTitleBar() {
   const { editor } = useCurrentEditor();
-  const [path, setPath] = useState<string | null>(null);
+  const { path, setPath } = usePathStore();
+  const { setTitle } = useTitleStore();
 
   return {
     editor,
-    path,
-    setPath,
     minimalWindow: electronAPI.minimalWindow,
     maximalWindow: electronAPI.maximalWindow,
     closeWindow: electronAPI.closeWindow,

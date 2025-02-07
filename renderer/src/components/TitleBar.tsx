@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useTitleBar } from "../hooks/useTitleBar";
+import { useTitleStore } from "../utils/stores";
 
-export default function TitleBar({ title, setTitle }: { title: string, setTitle: (data: string) => void }) {
-  const { minimalWindow, maximalWindow, closeWindow, openDialog, saveDialog } = useTitleBar(setTitle);
+export default function TitleBar() {
+  const { minimalWindow, maximalWindow, closeWindow, openDialog, saveDialog } = useTitleBar();
+  const { title } = useTitleStore();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

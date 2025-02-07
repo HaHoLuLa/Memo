@@ -10,3 +10,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
   saveDialog: (data: string, filePath?: string) => ipcRenderer.send('save-dialog', data, filePath),
   getFilePath: (callback: (filePath: string) => void) => ipcRenderer.on('file-saved', (event, filePath) => callback(filePath)),
 });
+// ipcRenderer.on("test", (event, fileData) => console.log("test", fileData));

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useEditor } from "@tiptap/react";
 import { extensions } from "../utils/extensions";
+import { useTitleStore } from "../utils/stores";
 
 export function useEditorSetup() {
-  const [title, setTitle] = useState("Memo");
+  const { setTitle } = useTitleStore();
 
   const editor = useEditor({
     extensions: extensions,
@@ -22,7 +23,7 @@ export function useEditorSetup() {
       window.electronAPI.changeTitle(newTitle);
       setTitle(newTitle);
     }
-  }, [editor]);
+  }, [editor, setTitle]);
 
-  return { editor, title, setTitle };
+  return { editor };
 }

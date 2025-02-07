@@ -1,5 +1,4 @@
 import { BrowserWindow } from "electron";
-import fs from "fs";
 import path from "path";
 
 let mainWindow: BrowserWindow | null = null;
@@ -18,7 +17,7 @@ export function createWindow() {
       preload: path.join(__dirname, "../preload.js"),
       contextIsolation: true,
       nodeIntegration: false,
-      devTools: true,
+      devTools: process.env.NODE_ENV === "development",
     },
   });
 
