@@ -1,27 +1,40 @@
 @font-face {
-  font-family: 'SUITE-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-family: "SUITE-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'D2Coding';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
+  font-family: "D2Coding";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 * {
-  font-family: 'SUITE-Regular', sans-serif;
+  font-family: "SUITE-Regular", sans-serif;
   user-select: none;
 }
 
-code {
-  font-family: 'D2Coding', monospace;
+code, code > span {
+  font-family: "D2Coding", monospace;
 }
 
-html, body {
+pre, blockquote {
+  margin-left: 0;
+  margin-right: 0
+}
+
+code:not(pre > code) {
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.3rem;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -34,6 +47,28 @@ html, body {
 
 .title-bar {
   -webkit-app-region: drag;
+  width: 100vw;
+  height: 30px;
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+}
+
+.title-bar > p {
+  padding-left: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 30%;
+}
+
+.title-bar > div {
+  display: flex;
+  height: 100%;
 }
 
 .title-bar-button {
@@ -45,10 +80,92 @@ html, body {
   padding: 0.75rem;
 }
 
+.main-wrapper {
+  width: 100%;
+  height: calc(100vh - 30px);
+  padding-top: 30px;
+  overflow-y: auto;
+}
+
 .ProseMirror:focus {
   outline: none;
 }
 
 .material-symbols-outlined {
   font-size: var(--font-size);
+}
+
+.tiptap .is-empty::before {
+  color: #8a91a2;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap p.is-editor-empty:first-child::before,
+.tiptap h1.is-editor-empty:first-child::before,
+.tiptap h2.is-editor-empty:first-child::before,
+.tiptap h3.is-editor-empty:first-child::before,
+.tiptap h4.is-editor-empty:first-child::before,
+.tiptap h5.is-editor-empty:first-child::before,
+.tiptap h6.is-editor-empty:first-child::before {
+  color: #8a91a2;
+  content: "문서의 제목을 입력해주세요";
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap ul[data-type="taskList"] {
+  margin-left: 0.4rem;
+  padding: 0;
+}
+
+.tiptap ul[data-type="taskList"] li::marker {
+  content: "";
+}
+
+.tiptap ul[data-type="taskList"] li {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  margin: 0.7rem 0;
+}
+
+.tiptap ul[data-type="taskList"] li div p {
+  padding-left: 0.1rem;
+  margin: 1rem 0;
+}
+
+.tiptap table .selectedCell {
+  color: var(--color-dark);
+  background-color: var(--color-secondary-lighten);
+}
+
+div.tableWrapper {
+  overflow-x: auto;
+}
+
+.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
+}
+
+pre code {
+  white-space: pre;
+  overflow-x: auto;
+}
+
+blockquote.is-empty::before {
+  margin-top: 0.85rem !important;
+}
+
+table {
+  box-shadow: none;
+  border-collapse: separate;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-background-sub);
 }
