@@ -9,7 +9,7 @@ export function openFileDialog(event: IpcMainEvent) {
   dialog
     .showOpenDialog(mainWindow, {
       title: "메모 열기",
-      filters: [{ name: "Memo", extensions: ["json"] }],
+      filters: [{ name: "Memo", extensions: ["memo"] }],
       properties: ["openFile"],
     })
     .then(({ filePaths }) => {
@@ -45,8 +45,8 @@ export function saveFileDialog(
     dialog
       .showSaveDialog(mainWindow, {
         title: "메모 저장",
-        defaultPath: "memo.json",
-        filters: [{ name: "Memo", extensions: ["json"] }],
+        defaultPath: "Memo.memo",
+        filters: [{ name: "Memo", extensions: ["memo"] }],
       })
       .then(({ filePath }) => {
         if (filePath) {
