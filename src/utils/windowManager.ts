@@ -1,4 +1,4 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, shell } from "electron";
 import path from "path";
 
 let mainWindow: BrowserWindow | null = null;
@@ -26,6 +26,11 @@ export function createWindow() {
   } else {
     mainWindow.loadFile(path.join(__dirname, "../../renderer/dist/index.html"));
   }
+
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: "deny" };
+  })
 }
 
 export function getMainWindow() {
