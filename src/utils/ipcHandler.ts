@@ -25,4 +25,4 @@ ipcMain.on('change-title', (event, title) => {
 });
 
 ipcMain.on('open-dialog', (event) => openFileDialog(event));
-ipcMain.on('save-dialog', (event, data, filePath) => saveFileDialog(event, data, filePath));
+ipcMain.on('save-dialog', (event, data, filePath, title) => saveFileDialog(event, data, filePath, title));

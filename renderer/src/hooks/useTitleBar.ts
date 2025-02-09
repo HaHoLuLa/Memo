@@ -5,7 +5,7 @@ import { useTitleStore, usePathStore } from "../utils/stores";
 export function useTitleBar() {
   const { editor } = useCurrentEditor();
   const { path, setPath } = usePathStore();
-  const { setTitle } = useTitleStore();
+  const { title, setTitle } = useTitleStore();
 
   return {
     editor,
@@ -13,6 +13,6 @@ export function useTitleBar() {
     maximalWindow: electronAPI.maximalWindow,
     closeWindow: electronAPI.closeWindow,
     openDialog: () => electronAPI.openDialog(editor as Editor, setTitle, setPath),
-    saveDialog: () => electronAPI.saveDialog(editor as Editor, path, setPath),
+    saveDialog: () => electronAPI.saveDialog(editor as Editor, path, setPath, title),
   };
 }

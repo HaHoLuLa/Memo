@@ -39,6 +39,7 @@ body {
   padding: 0;
   height: 100%;
   background-color: var(--color-background);
+  overflow: hidden;
 }
 
 .close-button:hover {
@@ -83,7 +84,7 @@ body {
 .main-wrapper {
   width: 100%;
   height: calc(100vh - 30px);
-  padding-top: 30px;
+  margin-top: 30px;
   overflow-y: auto;
 }
 
@@ -103,18 +104,8 @@ body {
   pointer-events: none;
 }
 
-.tiptap p.is-editor-empty:first-child::before,
-.tiptap h1.is-editor-empty:first-child::before,
-.tiptap h2.is-editor-empty:first-child::before,
-.tiptap h3.is-editor-empty:first-child::before,
-.tiptap h4.is-editor-empty:first-child::before,
-.tiptap h5.is-editor-empty:first-child::before,
-.tiptap h6.is-editor-empty:first-child::before {
-  color: #8a91a2;
-  content: "문서의 제목을 입력해주세요";
-  float: left;
-  height: 0;
-  pointer-events: none;
+.tiptap .is-empty:first-child::before {
+  content: "Memo";
 }
 
 .tiptap ul[data-type="taskList"] {
@@ -168,4 +159,8 @@ table {
 
 tr:nth-child(even) {
   background-color: var(--color-background-sub);
+}
+
+.tiptap img {
+  max-width: 100%;
 }

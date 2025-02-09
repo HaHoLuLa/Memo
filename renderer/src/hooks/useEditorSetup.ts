@@ -13,7 +13,7 @@ export function useEditorSetup() {
       const newTitle = editor.getText().split("\n")[0] || "Memo";
       window.electronAPI.changeTitle(newTitle);
       setTitle(newTitle);
-      console.log(editor.getJSON());
+      // console.log(editor.getJSON());
     }
   });
 

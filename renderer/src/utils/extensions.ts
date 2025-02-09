@@ -1,6 +1,6 @@
 import BulletList from "@tiptap/extension-bullet-list";
 import Color from "@tiptap/extension-color";
-import Document from "@tiptap/extension-document";
+// import Document from "@tiptap/extension-document";
 import Dropcursor from "@tiptap/extension-dropcursor";
 import Focus from "@tiptap/extension-focus";
 import FontFamily from "@tiptap/extension-font-family";
@@ -46,6 +46,7 @@ import CustomHeading from "./extends/CustomHeading";
 import CustomCodeBlockLowlight from "./extends/CustomCodeBlockLowlight";
 import CustomHighlight from "./extends/CustomHighlight";
 import Gapcursor from "@tiptap/extension-gapcursor";
+import CustomDocument from "./extends/CustomDocument";
 
 const lowlight = createLowlight(all);
 lowlight.register("css", css);
@@ -65,7 +66,7 @@ export const extensions = [
   CustomLink,
   CustomSuperscript,
   CustomHeading,
-  Document,
+  CustomDocument,
   Dropcursor.configure({
     color: "var(--color-primary)",
   }),

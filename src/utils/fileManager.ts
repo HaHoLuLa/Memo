@@ -32,7 +32,8 @@ export function openFileDialog(event: IpcMainEvent) {
 export function saveFileDialog(
   event: IpcMainEvent,
   data: string,
-  filePath?: string
+  filePath?: string,
+  title?: string
 ) {
   const mainWindow = getMainWindow();
   if (!mainWindow) return;
@@ -45,7 +46,7 @@ export function saveFileDialog(
     dialog
       .showSaveDialog(mainWindow, {
         title: "메모 저장",
-        defaultPath: "Memo.memo",
+        defaultPath: `${/[<>:"/\\|?*]/.test(title as string) ? "Memo" : title}.memo`,
         filters: [{ name: "Memo", extensions: ["memo"] }],
       })
       .then(({ filePath }) => {

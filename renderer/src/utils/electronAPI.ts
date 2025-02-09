@@ -28,14 +28,14 @@ export const electronAPI = {
       setPath(filePath);
     });
   },
-  saveDialog: (editor: Editor, path: string | null, setPath: (path: string | null) => void) => {
+  saveDialog: (editor: Editor, path: string | null, setPath: (path: string | null) => void, title?: string) => {
     console.log("Save dialog event sent");
     const data = JSON.stringify(editor?.getJSON());
 
     if (path) {
       window.electronAPI.saveDialog(data, path);
     } else {
-      window.electronAPI.saveDialog(data);
+      window.electronAPI.saveDialog(data, undefined, title);
       window.electronAPI.getFilePath((filePath: string) => {
         setPath(filePath);
       });
